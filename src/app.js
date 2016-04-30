@@ -6,6 +6,8 @@
 
 var UI = require('ui');
 var Vector2 = require('vector2');
+//var Accel = require('ui/accel');
+//Accel.config({rate:90});
 
 var main = new UI.Card({
   title: 'Decision Maker',
@@ -15,11 +17,7 @@ var main = new UI.Card({
   subtitleColor: 'indigo', // Named colors
   bodyColor: '#9a0036' // Hex colors
 });
-
-main.show();
-
-main.on('click', 'select', function(e) {
-  var menu = new UI.Menu({
+var menu = new UI.Menu({
     sections: [{
       items: [
         {
@@ -37,28 +35,48 @@ main.on('click', 'select', function(e) {
       ]
     }]
   });
-  menu.on('select', function(e) {
-    var answer ='';
-    if (e.itemIndex==2){
-       answer=getRandomNumber();
-    }else {
-      answer=getRandomAnswer(e.itemIndex);
-    };
-    var wind = new UI.Window({
-    fullscreen: true,
-    });
-    var textfield = new UI.Text({
-      position: new Vector2(0, 65),
-      size: new Vector2(144, 30),
-      font: 'gothic-24-bold',
-      text: answer,
-      textAlign: 'center'
-    });
-    wind.add(textfield);
-    wind.show();
-    });
+
+main.show();
+
+main.on('click', 'select', function(e) {
     menu.show();
 });
+
+menu.on('select', function(e) {
+  var answer ='';
+  if (e.itemIndex==2){
+    answer=getRandomNumber();
+  }else {
+    answer=getRandomAnswer(e.itemIndex);
+  }
+  var wind = new UI.Window({
+    fullscreen: true,
+  });
+  var textfield = new UI.Text({
+    position: new Vector2(0, 65),
+    size: new Vector2(144, 100),
+    font: 'gothic-24-bold',
+    text: answer,
+    textAlign: 'center'
+  });
+  wind.add(textfield);
+  wind.show();
+});
+
+// menu.on('accelData', function(e) {
+//   //console.log('Accel data: ' + JSON.stringify(e.accel));
+//   var d =0;
+//    if (e.accels[24].y>300) {
+//       d = -1;
+//     }else if (e.accels[24].y<-600){
+//       d = +1;
+//     }
+//   var si = this._selection.itemIndex;
+//   si = si + d;
+//   if (si == this.state.sections[0].items.length) {si = 0;}
+//   if (si < 0) {si = this.state.sections[0].items.length - 1;}
+//   this.selection(0,si);
+// });
 
 function getRandomNumber(){
   return Math.floor(Math.random()*9)+1;
@@ -102,7 +120,7 @@ function getRandomAnswer(_i){
     'You should not'
   ];
   
-  var oi = 4;
+  var oi = 5;
   var pi=6;
   if (_i==1){
     oi=6;
