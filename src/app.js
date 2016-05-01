@@ -1,36 +1,37 @@
 /**
- * Welcome to Pebble.js!
- *
- * This is where you write your app.
+ * Pebble DecisionMaker
  */
-
+// http://icons8.com
 var UI = require('ui');
 var Vector2 = require('vector2');
-//var Accel = require('ui/accel');
-//Accel.config({rate:90});
 
 var main = new UI.Card({
   title: 'Decision Maker',
-  icon: 'images/menu_icon.png',
-  subtitle: 'Do you feel uncertain?',
+  icon: 'images/BDBI_32.png',
+  subtitle: "Giving you a little decision help when you need it!",
+  style: 'small',
   body: 'Press select button',
   subtitleColor: 'indigo', // Named colors
   bodyColor: '#9a0036' // Hex colors
 });
 var menu = new UI.Menu({
+    highlightBackgroundColor: 'blue',
     sections: [{
       items: [
         {
         title: 'Optimistic',
-        subtitle: 'I feel lucky!'
+        subtitle: 'I feel lucky!',
+        icon: 'images/CCWI_24.png'
         },
         {
         title: 'Pessimistic',
-        subtitle: 'I have second thoughts'
+        subtitle: 'I have 2ns thoughts',
+        icon: 'images/CDWI_24.png'
         },
         {
-        title: 'Guess my though',
-        subtitle: 'Random number (1-10)'
+        title: 'Guess',
+        subtitle: 'Number (1-10)',
+        icon: 'images/GDWI_24.png'
         }
       ]
     }]
@@ -43,44 +44,60 @@ main.on('click', 'select', function(e) {
 });
 
 menu.on('select', function(e) {
-  var answer ='';
-  if (e.itemIndex==2){
-    answer=getRandomNumber();
-  }else {
-    answer=getRandomAnswer(e.itemIndex);
-  }
   var wind = new UI.Window({
     fullscreen: true,
+    backgroundColor : 'white'
   });
-  var textfield = new UI.Text({
-    position: new Vector2(0, 65),
-    size: new Vector2(144, 100),
-    font: 'gothic-24-bold',
-    text: answer,
-    textAlign: 'center'
-  });
-  wind.add(textfield);
+  var txt = new UI.Text();
+  var txt_1 = new UI.Text();
+  wind.add(txt_1);
   wind.show();
+  
+  anim();
+  
+  function anim(_timeout){
+    if (_timeout === undefined){_timeout=0;}
+    setTimeout(function(){ 
+      var answer ='';
+      if (e.itemIndex==2){
+        answer=Math.floor(Math.random()*9)+1;
+      }else {
+        answer=getRandomAnswer(e.itemIndex);
+      }
+      
+      if (txt){wind.remove(txt);}
+      txt = new UI.Text({
+        position: new Vector2(0, 32),
+        size: new Vector2(144, 84),
+        font: 'gothic-28-bold',
+        color: 'blue',
+        text: answer,
+        textAlign: 'center'
+      });
+      wind.add(txt);
+      
+      if (_timeout<300) {
+        if (_timeout>100){
+               anim(_timeout+20);
+        }else {
+               anim(_timeout+5);
+        }
+      } else {
+        if (txt_1){wind.remove(txt_1);}
+        txt_1 = new UI.Text({
+          position: new Vector2(0, 124),
+          size: new Vector2(144, 84),
+          font: 'gothic-18',
+          color: 'black',
+          text: 'Shake to try again',
+          textAlign: 'center'
+        });
+        wind.add(txt_1);      
+      }
+      
+      }, _timeout);
+  }
 });
-
-// menu.on('accelData', function(e) {
-//   //console.log('Accel data: ' + JSON.stringify(e.accel));
-//   var d =0;
-//    if (e.accels[24].y>300) {
-//       d = -1;
-//     }else if (e.accels[24].y<-600){
-//       d = +1;
-//     }
-//   var si = this._selection.itemIndex;
-//   si = si + d;
-//   if (si == this.state.sections[0].items.length) {si = 0;}
-//   if (si < 0) {si = this.state.sections[0].items.length - 1;}
-//   this.selection(0,si);
-// });
-
-function getRandomNumber(){
-  return Math.floor(Math.random()*9)+1;
-}
 
 function getRandomArrayElements(arr, count) {
     var shuffled = arr.slice(0), i = arr.length, min = i - count, temp, index;
@@ -104,20 +121,25 @@ function getRandomAnswer(_i){
     "Yes",
     "What are you waiting for?",
     "Try it",
-    "Just do it"
+    "Just do it",
+    "Your heart says yes"
     ];
   
   var ps= [
-    'Do something else',
-    'No way!',
-    'Maybe later',
-    'Try again',
-    'Do you have other options?',
-    'Ask someone for an advice',
-    'Forget it',
-    'No luck',
-    'just...no',
-    'You should not'
+    "Do something else",
+    "No way!",
+    "Maybe later",
+    "Try again",
+    "Do you have other options?",
+    "Ask someone for an advice",
+    "Forget it",
+    "No luck",
+    "just...no",
+    "You should not",
+    "Results may vary",
+    "Caution",
+    "Decide not to",
+    "Some other time"
   ];
   
   var oi = 5;
