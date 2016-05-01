@@ -42,27 +42,41 @@ main.show();
 main.on('click', 'select', function(e) {
     menu.show();
 });
-
-menu.on('select', function(e) {
-  var wind = new UI.Window({
+var wind = new UI.Window({
     fullscreen: true,
     backgroundColor : 'white'
   });
-  var txt = new UI.Text();
-  var txt_1 = new UI.Text();
-  wind.add(txt_1);
+var txt = new UI.Text();
+var txt_1 = new UI.Text();
+wind.add(txt);
+wind.add(txt_1);
+var m_allowRefresh = false;
+var m_itemIndex = 0;
+ wind.on('accelTap', function(e) {
+   if (m_allowRefresh === true) {
+     action(m_itemIndex);
+   }        
+  });
+
+menu.on('select', function(e) {
+  action(e.itemIndex);
   wind.show();
-  
+});
+
+function action(_itemIndex){
+  m_itemIndex = _itemIndex;
+  if (txt_1){wind.remove(txt_1);}
   anim();
   
   function anim(_timeout){
+    m_allowRefresh = false;
     if (_timeout === undefined){_timeout=0;}
     setTimeout(function(){ 
       var answer ='';
-      if (e.itemIndex==2){
+      if (_itemIndex==2){
         answer=Math.floor(Math.random()*9)+1;
       }else {
-        answer=getRandomAnswer(e.itemIndex);
+        answer=getRandomAnswer(_itemIndex);
       }
       
       if (txt){wind.remove(txt);}
@@ -83,7 +97,6 @@ menu.on('select', function(e) {
                anim(_timeout+5);
         }
       } else {
-        if (txt_1){wind.remove(txt_1);}
         txt_1 = new UI.Text({
           position: new Vector2(0, 124),
           size: new Vector2(144, 84),
@@ -92,12 +105,13 @@ menu.on('select', function(e) {
           text: 'Shake to try again',
           textAlign: 'center'
         });
-        wind.add(txt_1);      
+        wind.add(txt_1); 
+        m_allowRefresh = true;
       }
       
       }, _timeout);
   }
-});
+}
 
 function getRandomArrayElements(arr, count) {
     var shuffled = arr.slice(0), i = arr.length, min = i - count, temp, index;
@@ -123,6 +137,21 @@ function getRandomAnswer(_i){
     "Try it",
     "Just do it",
     "Your heart says yes"
+    "Do it",
+    "Proceed",
+    "A little bird said yes",
+    "Simon said yes",
+    "Everyone knows it's a yes",
+    "Pebble said yes",
+    "Positive",
+    "Final result...yes!",
+    "My sources says yes!",
+    "Looks promising!",
+    "Sounds like a great idea",
+    "Come on.. do it!",
+    "Sure thing!",
+    "Certainly",
+    "Wise thing to do"
     ];
   
   var ps= [
@@ -139,7 +168,25 @@ function getRandomAnswer(_i){
     "Results may vary",
     "Caution",
     "Decide not to",
-    "Some other time"
+    "Some other time",
+    "Don't do it",
+    "Do not proceed",
+    "A little bird said no",
+    "Simon said no",
+    "Everybody said no",
+    "Pebble said no",
+    "Pebble said you must think it again",
+    "Shake your hand again, the result was negative",
+    "Negative",
+    "Final result...no!",
+    "My sources says no!",
+    "Sounds like a bad idea",
+    "Step back boy!",
+    "Ehmmm.. no",
+    "Better not",
+    "Bad idea",
+    "Not a vert wise thing to do",
+    "You have better things to consider"
   ];
   
   var oi = 5;
