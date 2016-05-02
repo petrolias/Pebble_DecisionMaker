@@ -30,6 +30,26 @@
                 "type": "font"
             },
             {
+                "file": "images/dice_24.png",
+                "name": "IMAGES_DICE_24_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/he_24.png",
+                "name": "IMAGES_HE_24_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/hf_24.png",
+                "name": "IMAGES_HF_24_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/Q_32.png",
+                "name": "IMAGES_Q_32_PNG",
+                "type": "png"
+            },
+            {
                 "file": "images/GDWI_24.png",
                 "name": "IMAGES_GDWI_24_PNG",
                 "type": "png"
@@ -43,16 +63,6 @@
                 "file": "images/CCWI_24.png",
                 "name": "IMAGES_CCWI_24_PNG",
                 "type": "png"
-            },
-            {
-                "file": "images/BDBI_32.png",
-                "name": "IMAGES_BDBI_32_PNG",
-                "type": "png"
-            },
-            {
-                "file": "images/Business-DecisionW-icon_24.png",
-                "name": "IMAGES_BUSINESS_DECISIONW_ICON_24_PNG",
-                "type": "png"
             }
         ]
     },
@@ -64,7 +74,7 @@
     ],
     "uuid": "2b714f5e-69ca-4bd8-bc05-f7c3e24f8d75",
     "versionCode": 1,
-    "versionLabel": "1.05",
+    "versionLabel": "1.06",
     "watchapp": {
         "hiddenApp": false,
         "watchface": false
