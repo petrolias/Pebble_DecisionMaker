@@ -4,13 +4,12 @@
         ""
     ],
     "companyName": "petroliaschristopher@gmail.com",
-    "longName": "DecisionMaker",
+    "longName": "Decision Maker",
     "projectType": "pebblejs",
     "resources": {
         "media": [
             {
                 "file": "images/menu_icon.png",
-                "menuIcon": true,
                 "name": "IMAGE_MENU_ICON",
                 "type": "bitmap"
             },
@@ -28,6 +27,12 @@
                 "file": "fonts/UbuntuMono-Regular.ttf",
                 "name": "MONO_FONT_14",
                 "type": "font"
+            },
+            {
+                "file": "images/dm_logo_28.png",
+                "menuIcon": true,
+                "name": "IMAGES_DM_LOGO_28_PNG",
+                "type": "png"
             },
             {
                 "file": "images/dice_24.png",
@@ -48,21 +53,6 @@
                 "file": "images/Q_32.png",
                 "name": "IMAGES_Q_32_PNG",
                 "type": "png"
-            },
-            {
-                "file": "images/GDWI_24.png",
-                "name": "IMAGES_GDWI_24_PNG",
-                "type": "png"
-            },
-            {
-                "file": "images/CDWI_24.png",
-                "name": "IMAGES_CDWI_24_PNG",
-                "type": "png"
-            },
-            {
-                "file": "images/CCWI_24.png",
-                "name": "IMAGES_CCWI_24_PNG",
-                "type": "png"
             }
         ]
     },
@@ -74,7 +64,7 @@
     ],
     "uuid": "2b714f5e-69ca-4bd8-bc05-f7c3e24f8d75",
     "versionCode": 1,
-    "versionLabel": "1.06",
+    "versionLabel": "1.07",
     "watchapp": {
         "hiddenApp": false,
         "watchface": false
